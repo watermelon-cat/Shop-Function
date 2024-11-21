@@ -1,0 +1,85 @@
+#include<iostream>
+using namespace std;
+
+//gloabal variable
+string inventory[10];
+int money = 100;
+
+//function decleration
+void shop();
+
+int main() {
+	//local variables 
+	int room = 1;
+
+	string input;
+	do {
+
+		//stuff here gets done every turn
+		cout << "your inventory:";
+		for (int i = 0; i < 10; i++)
+			cout << inventory[i] << "|";
+		cout << endl << endl;
+
+		switch (room) {
+		case 1:
+			cout << "you're in room 1, you can go south" << endl;
+			cin >> input;
+			if (input == "south")
+				room = 2;
+			break;
+		case 2:
+			shop();//function call
+			cout << "you're in room 2, you can go north" << endl;
+			cin >> input;
+			if (input == "north")
+				room = 1;
+			break;
+
+		}// end of switch
+	} while (input != "quit");
+}// end main
+
+void shop() {
+	char input = 'p';
+	cout << endl << endl << "-------------------------------------------------------------------------" << endl;
+	cout <<endl<< "SHOP" << endl;
+	cout << endl << "-------------------------------------------------------------------------" << endl;
+	while (input != 'q') {
+		cout << "press (p) for potion($10), (s) for sword($20), (a) for armor($50), and (q) to quit" << endl;
+		cout << "-------------------------------------------------------------------------" << endl;
+		cin >> input;
+		switch (input) {
+		case 'p':
+			if (money >= 10) {
+				cout << "you got a potion" << endl;
+				inventory[0] = "potion";
+				money -= 10;
+			}
+			else
+				cout << "you don't have enough money" << endl;
+			break;
+		case 's':
+			if (money >= 20) {
+				cout << "you got a sword" << endl;
+				inventory[1] = "sword";
+			}
+			else
+				cout << "you don't have enough money" << endl;
+			break;
+		case 'a':
+			if (money >= 50) {
+				cout << "you got some armor" << endl;
+				inventory[2] = "armor";
+			}
+			else
+				cout << "you don't have enough money" << endl;
+			break;
+
+		}
+
+
+	}
+	cout << endl << "-------------------------------------------------------------------------" << endl;
+
+}
